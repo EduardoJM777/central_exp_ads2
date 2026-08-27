@@ -1,7 +1,6 @@
 import type { Challenge } from '../domain/challenge.js';
 
 export const challenges: Challenge[] = [
-  // Nível 1: reconhecer situações comuns de tecnologia.
   {
     id: 'senha-segura', title: 'Senha Comprometida', level: 'NÍVEL 1 — INICIANTE',
     briefing: 'O sistema encontrou três senhas. Uma delas é mais difícil de adivinhar porque mistura letras, números e símbolo.',
@@ -31,7 +30,6 @@ export const challenges: Challenge[] = [
     explanation: 'HTTPS protege a comunicação entre o navegador e o site durante o caminho.', timeLimitSeconds: 90,
   },
 
-  // Nível 2: aplicar uma regra simples dentro de um contexto tecnológico.
   {
     id: 'capacidade-digital', title: 'Memória do Servidor', level: 'NÍVEL 2 — INVESTIGADOR',
     briefing: 'A capacidade dobra em cada etapa: 2 GB, 4 GB, 8 GB, ?. Um valor desapareceu.',
@@ -61,7 +59,6 @@ export const challenges: Challenge[] = [
     explanation: 'HTML descreve a estrutura de uma página; h1 representa seu título principal.', timeLimitSeconds: 100,
   },
 
-  // Nível 3: um conceito real do curso, mas com todas as informações necessárias na tela.
   {
     id: 'sequencia-computador', title: 'Processamento Crescente', level: 'NÍVEL 3 — DESAFIO FINAL',
     briefing: 'Um computador processa 1, 2, 4 e 8 tarefas por etapa. O número sempre dobra.',
