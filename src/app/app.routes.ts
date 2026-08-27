@@ -26,9 +26,11 @@ export const routes: Routes = [
 
     {
         path: 'experiencias/sistema-invadido',
-        component: ComingSoonComponent,
-        data: { title: 'Sistema Invadido', emoji: '🔐' }
+        loadComponent: () =>
+            import('../../sistema-invadido/frontend/src/app/app')
+                .then((m) => m.App)
     },
+    
     {
         path: 'experiencias/banco-de-dados',
         component: ComingSoonComponent,

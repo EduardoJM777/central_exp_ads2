@@ -17,7 +17,7 @@ export const EXPERIENCE_MENU_ITEMS: ExperienceMenuItem[] = [
         description: 'Investiga pistas para descobrir uma senha ou usuário.',
         concepts: 'Segurança, lógica, dados',
         duration: '60-90s',
-        status: 'coming-soon'
+        status: 'ready'
     },
     {
         slug: 'banco-de-dados',
