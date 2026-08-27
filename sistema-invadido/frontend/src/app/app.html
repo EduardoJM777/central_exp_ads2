@@ -1,0 +1,140 @@
+<div class="matrix" aria-hidden="true"></div>
+<header class="topbar">
+  <button class="brand" type="button" (click)="goHome()" aria-label="Voltar ao início">
+    <span class="brand-mark">&gt;_</span>
+    <span><strong>CENTRAL ADS</strong><small>SISTEMA_INVADIDO</small></span>
+  </button>
+  <div class="system-state"><i></i> SIMULAÇÃO SEGURA <span>•</span> REDE LOCAL</div>
+</header>
+
+<main>
+  @if (screen() === 'start') {
+    <section class="start-screen">
+      <div class="hero-copy">
+        <div class="intrusion-alert" role="alert">
+          <div class="alert-symbol">!</div>
+          <div><b>ALERTA CRÍTICO</b><span>INVASÃO DETECTADA • PROTOCOLO DE CONTENÇÃO ATIVO</span></div>
+          <button type="button" (click)="playIntrusionAlert()" aria-label="Ouvir alerta sonoro">◖)) OUVIR ALERTA</button>
+        </div>
+        <p class="eyebrow danger-copy">// INCIDENTE 02 — SEGURANÇA DIGITAL</p>
+        <h1>O SISTEMA FOI<br><em>INVADIDO.</em></h1>
+        <p class="lead">Uma atividade suspeita comprometeu a rede. Você tem 3 minutos para analisar evidências de tecnologia, identificar a falha e recuperar o acesso.</p>
+        <form class="access-form" (ngSubmit)="startGame()">
+          <label for="nickname">IDENTIFICAÇÃO DO AGENTE</label>
+          <div class="input-row"><span>USR://</span><input id="nickname" name="nickname" [(ngModel)]="nickname" maxlength="18" autocomplete="off" placeholder="digite seu apelido" aria-describedby="privacy-note"></div>
+          @if (errorMessage()) { <p class="error" role="alert">{{ errorMessage() }}</p> }
+          <button class="primary-action" type="submit" [disabled]="loading()"><span>{{ loading() ? 'CONECTANDO...' : 'INICIAR INVESTIGAÇÃO' }}</span><b>→</b></button>
+          <small id="privacy-note">Seu apelido será usado apenas no ranking deste evento.</small>
+        </form>
+        <div class="trust-row"><span><b>03</b> NÍVEIS</span><span><b>~03</b> MINUTOS</span><span><b>450</b> PONTOS MÁX.</span></div>
+      </div>
+      <aside class="ranking-card">
+        <div class="card-heading"><span>RANKING // AO VIVO</span><button type="button" (click)="showRanking()">VER TODOS</button></div>
+        @if (ranking().length === 0) {
+          <div class="empty-rank">O ranking está aguardando o primeiro agente.</div>
+        } @else {
+          <ol>
+            @for (entry of ranking().slice(0, 5); track entry.id; let index = $index) {
+              <li [class.top]="index < 3"><span class="position">{{ rankLabel(index) }}</span><span class="agent">{{ entry.nickname }}</span><strong>{{ entry.score }}<small> PTS</small></strong></li>
+            }
+          </ol>
+        }
+        <div class="event-count"><span>{{ participants() }}</span> AGENTES CONCLUÍRAM A MISSÃO</div>
+      </aside>
+    </section>
+  }
+
+  @if (screen() === 'game' && challenge(); as mission) {
+    <section class="game-screen">
+      <div class="mission-top">
+        <div><p class="eyebrow">AGENTE {{ nickname.toUpperCase() }}</p><h2>MISSÃO {{ challengeNumber() }}<span>/03</span></h2></div>
+        <div class="scorebox"><small>PONTUAÇÃO</small><strong>{{ score() }}</strong></div>
+        <div class="timer" [class.danger]="timeLeft() <= 15"><small>TEMPO</small><strong>00:{{ timeLeft().toString().padStart(2, '0') }}</strong></div>
+      </div>
+      <div class="progress"><i [style.width.%]="progress()"></i></div>
+      <div class="mission-grid">
+        <article class="terminal-panel">
+          <div class="window-bar"><span><i></i><i></i><i></i></span><b>secure_terminal.exe</b><small>{{ mission.level }}</small></div>
+          <div class="terminal-body">
+            <div class="live-terminal" aria-label="Terminal simulado em execução">
+              @for (line of terminalLines(); track $index) {
+                <p class="log" [class.success]="line.startsWith('[OK]')" [class.warning]="line.startsWith('[WARN]')">{{ line }}</p>
+              }
+              <p class="terminal-prompt">C:\ADS&gt;<i></i></p>
+            </div>
+            <div class="case-title"><span>ARQUIVO_{{ challengeNumber().toString().padStart(2, '0') }}</span><h3>{{ mission.title }}</h3><p>{{ mission.briefing }}</p></div>
+            <div class="question"><small>OBJETIVO</small><p>{{ mission.prompt }}</p></div>
+            <form class="answer-form" (ngSubmit)="submitAnswer()">
+              <label>SELECIONE UMA RESPOSTA</label>
+              <div class="answer-options" role="radiogroup" [attr.aria-label]="mission.prompt">
+                @for (option of mission.options; track option; let index = $index) {
+                  <button type="button" role="radio" [attr.aria-checked]="answer === option" [class.selected]="answer === option" (click)="selectAnswer(option)"><b>{{ index + 1 }}</b><span>{{ option }}</span></button>
+                }
+              </div>
+              @if (errorMessage()) { <p class="error" role="alert">{{ errorMessage() }}</p> }
+              <button class="primary-action" type="submit" [disabled]="loading() || !answer.trim()"><span>{{ loading() ? 'VALIDANDO...' : 'VALIDAR ACESSO' }}</span><b>↵</b></button>
+            </form>
+          </div>
+        </article>
+        <aside class="clues-panel">
+          <div class="card-heading"><span>EVIDÊNCIAS</span><small>{{ revealedClues() }}/{{ mission.clues.length }}</small></div>
+          <div class="clue-list">
+            @for (clue of mission.clues; track $index; let index = $index) {
+              <div class="clue" [class.locked]="index >= revealedClues()"><b>{{ (index + 1).toString().padStart(2, '0') }}</b>
+                @if (index < revealedClues()) { <p>{{ clue }}</p> } @else { <p>ARQUIVO CRIPTOGRAFADO</p><span>▦</span> }
+              </div>
+            }
+          </div>
+          <button class="secondary-action" type="button" (click)="revealClue()" [disabled]="revealedClues() >= mission.clues.length">LIBERAR PRÓXIMA PISTA <span>−15 PTS</span></button>
+          <button class="text-action" type="button" (click)="skipCurrent()">Pular esta missão</button>
+        </aside>
+      </div>
+    </section>
+  }
+
+  @if (screen() === 'feedback' && feedback(); as result) {
+    <section class="feedback-screen" [class.denied]="!result.correct">
+      <div class="scan-icon">{{ result.correct ? '✓' : '×' }}</div>
+      <p class="eyebrow">{{ result.correct ? '// AUTENTICAÇÃO CONCLUÍDA' : '// ACESSO RECUSADO' }}</p>
+      <h2>{{ result.correct ? 'ACESSO CONCEDIDO' : 'MISSÃO ENCERRADA' }}</h2>
+      @if (result.correct) { <p>{{ result.explanation }}</p><div class="points-earned"><span>+{{ result.scoreEarned }}</span> PONTOS RECUPERADOS</div> }
+      @else { <p>Nem toda hipótese funciona de primeira. Eliminar possibilidades também faz parte da investigação.</p> }
+      @if (result.correct && !result.completed) { <div class="level-up">↑ NÍVEL SEGUINTE DESBLOQUEADO</div> }
+      <button class="primary-action compact" type="button" (click)="continueGame()"><span>{{ result.completed ? 'VER RESULTADO' : 'PRÓXIMA MISSÃO' }}</span><b>→</b></button>
+    </section>
+  }
+
+  @if (screen() === 'result') {
+    <section class="result-screen">
+      <div class="six-seven-stage" role="img" aria-label="Bonequinho comemorando e fazendo o gesto six seven">
+        <div class="celebration-code" aria-hidden="true"><span>ACCESS_GRANTED</span><span>MISSION_COMPLETE</span><span>RANKING_UPDATED</span></div>
+        <div class="little-hacker" aria-hidden="true">
+          <div class="hood"></div>
+          <div class="head"><i></i><i></i><b></b></div>
+          <div class="body"><span>&gt;_</span></div>
+          <div class="arm arm-left"><span>6</span></div>
+          <div class="arm arm-right"><span>7</span></div>
+          <div class="leg leg-left"></div><div class="leg leg-right"></div>
+        </div>
+        <div class="six-seven-label"><b>6</b><span>SIX • SEVEN</span><b>7</b></div>
+      </div>
+      <p class="eyebrow">// RELATÓRIO DA OPERAÇÃO</p><h2>MISSÃO <em>CONCLUÍDA.</em></h2>
+      <p class="result-lead">Você investigou informações, eliminou possibilidades e tomou decisões. Isso também é desenvolver sistemas.</p>
+      <div class="result-grid"><div><small>AGENTE</small><strong>{{ nickname }}</strong></div><div><small>PONTUAÇÃO</small><strong>{{ score() }} <i>PTS</i></strong></div><div><small>ACESSOS</small><strong>{{ correctAnswers() }}/3</strong></div></div>
+      <div class="skill-card"><span>PERFIL DESBLOQUEADO</span><h3>INVESTIGADOR(A) DIGITAL</h3><p>Curiosidade, lógica e atenção aos detalhes são habilidades usadas todos os dias por quem estuda ADS.</p></div>
+      <div class="button-pair"><button class="primary-action compact" type="button" (click)="goHome()"><span>NOVA OPERAÇÃO</span><b>↻</b></button><button class="secondary-action compact" type="button" (click)="showRanking()">VER RANKING</button></div>
+    </section>
+  }
+
+  @if (screen() === 'ranking') {
+    <section class="ranking-screen">
+      <p class="eyebrow">// PLACAR DO EVENTO</p><h2>TOP AGENTES</h2><p>Os melhores resultados da Central de Experiências ADS.</p>
+      <div class="ranking-table"><div class="ranking-row header"><span>POS.</span><span>AGENTE</span><span>ACESSOS</span><span>PONTOS</span></div>
+        @for (entry of ranking(); track entry.id; let index = $index) { <div class="ranking-row" [class.top]="index < 3"><span>{{ rankLabel(index) }}</span><strong>{{ entry.nickname }}</strong><span>{{ entry.correctAnswers }}/3</span><b>{{ entry.score }}</b></div> }
+        @empty { <div class="empty-rank large">Ainda não há resultados. Seja o primeiro agente.</div> }
+      </div>
+      <button class="primary-action compact" type="button" (click)="goHome()"><span>VOLTAR AO INÍCIO</span><b>←</b></button>
+    </section>
+  }
+</main>
+<footer><span>UPX • ANÁLISE E DESENVOLVIMENTO DE SISTEMAS</span><span>EXPERIÊNCIA 100% SIMULADA — NENHUM SISTEMA REAL É ACESSADO</span></footer>
