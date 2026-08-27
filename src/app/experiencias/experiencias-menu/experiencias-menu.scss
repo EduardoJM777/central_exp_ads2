@@ -1,0 +1,132 @@
+:host {
+    --em-bg: #0e1420;
+    --em-surface: #161d2e;
+    --em-border: #2a3757;
+    --em-text: #e7ecf3;
+    --em-text-muted: #8a93a6;
+    --em-amber: #ffb454;
+    --em-teal: #5eead4;
+
+    display: block;
+    background: radial-gradient(circle at 80% -10%, #1a2440 0%, var(--em-bg) 55%);
+    color: var(--em-text);
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100%;
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    box-sizing: border-box;
+}
+
+.em-stage {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.em-header {
+    text-align: center;
+    margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.em-eyebrow {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--em-teal);
+    margin-bottom: 0.75rem;
+}
+
+.em-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin: 0 0 0.5rem;
+}
+
+.em-subtitle {
+    color: var(--em-text-muted);
+    margin: 0;
+}
+
+.em-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.em-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: var(--em-surface);
+    border: 1px solid var(--em-border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+        transform: translateY(-3px);
+        border-color: var(--em-teal);
+    }
+
+    &--soon {
+        opacity: 0.75;
+    }
+}
+
+.em-card-emoji {
+    font-size: 1.8rem;
+}
+
+.em-card-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+.em-card-description {
+    color: var(--em-text-muted);
+    font-size: 0.85rem;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.em-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+}
+
+.em-card-duration {
+    color: var(--em-text-muted);
+}
+
+.em-card-badge {
+    border: 1px solid var(--em-border);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    color: var(--em-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-left: 8px;
+
+    &--ready {
+        border-color: var(--em-amber);
+        color: var(--em-amber);
+    }
+}
+
+.em-back {
+    display: block;
+    text-align: center;
+    color: var(--em-text-muted);
+    font-size: 0.85rem;
+    text-decoration: none;
+
+    &:hover { color: var(--em-text); } 
+}

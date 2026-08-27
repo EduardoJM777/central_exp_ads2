@@ -1,0 +1,32 @@
+<div class="hm-stage">
+    <div class="hm-content">
+
+        <span class="hm-eyebrow">Central de Experiências ADS</span>
+        <h1 class="hm-title">Teste seu raciocínio.<br>
+            Resolva desafios.<br>
+            <span>Descubra seu perfil.</span>
+        </h1>
+
+        <button class="hm-cta" routerLink="/experiencias">Começar agora</button>
+
+        <p class="hm-hint">Não é necessário conhecimento prévio de programação.</p>
+
+        <div class="hm-stats">
+            <div class="hm-stat">
+                <span class="hm-stat-value">{{ challengesCompletedToday }}</span>
+                <span class="hm-stat-label">desafios realizados hoje</span>
+            </div>
+        </div>
+
+        <div class="hm-ranking" *ngIf="topRanking.length">
+            <h2 class="hm-ranking-title">Melhores do dia</h2>
+            <ol class="hm-ranking-list">
+                <li *ngFor="let entry of topRanking">
+                    <span>{{ entry.alias }}</span>
+                    <span>{{ entry.score }} pts</span>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+</div>

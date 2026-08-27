@@ -1,0 +1,115 @@
+<div class="lc-stage">
+
+    <section class="lc-intro" *ngIf="stage() === 'intro'">
+        <span class="lc-eyebrow">Experiência 01 - Central de Experiências ADS</span>
+        <h1 class="lc-title">Desafio da <span>Lógica</span></h1>
+        <p class="lc-subtitle">
+            Você tem 3 minutos? Descubra se consegue pensar como um desenvolvedor.
+        </p>
+
+        <div class="lc-trace" aria-hidden="true">
+            <span>2</span><i></i><span>4</span><i></i>
+            <span>8</span><i></i><span>16</span><i></i>
+            <span class="lc-trace-blank">?</span>
+        </div>
+
+        <button class="lc-btn lc-btn--primary lc-btn--lg" (click)="start()">
+            Começar agora
+        </button>
+
+        <p class="lc-hint">Não é necessário saber programar. {{ questions.length }} desafios rápidos, um resultado no
+            final.</p>
+    </section>
+
+
+
+
+    <section class="lc-play" *ngIf="stage() === 'playing' || stage() === 'feedback'">
+
+        <header class="lc-play-header">
+            <div class="lc-progress-track">
+                <div class="lc-progress-fill" [style.width.%]="progressPercent()"></div>
+            </div>
+            <div class="lc-play-meta">
+                <span class="lc-step">Desafio {{ currentIndex() + 1 }} de {{ questions.length }}</span>
+
+                <span class="lc-score">{{ score() }} pts</span>
+            </div>
+        </header>
+
+        <div class="lc-card">
+            <div class="lc-card-top">
+                <span class="lc-type-tag">{{ currentQuestion().typeLabel }}</span>
+                <div class="lc-timer" [class.lc-timer--low]="timeRemaining() <= 10">
+                    <div class="lc-timer-bar" [style.width.%]="timeProgressPercent()"></div>
+                    <span class="lc-timer-value">{{ timeRemaining() }}s</span>
+                </div>
+            </div>
+
+
+            <p class="lc-scenario" *ngIf="currentQuestion().scenario">{{ currentQuestion().scenario }}</p>
+            <h2 class="lc-prompt" [class.lc-prompt--code]="currentQuestion().type === 'sequence'">
+                {{ currentQuestion().prompt }}
+            </h2>
+
+            <div class="lc-options">
+                <button *ngFor="let option of currentQuestion().options; let i = index" class="lc-option"
+                    [class.lc-option--selected]="selectedOption() === i"
+                    [class.lc-option--correct]="stage() === 'feedback' && i === currentQuestion().correctIndex"
+                    [class.lc-option--wrong]="stage() === 'feedback' && selectedOption() === i && i !== currentQuestion().correctIndex"
+                    [disabled]="stage() === 'feedback'" (click)="selectOption(i)">
+                    {{ option }}
+                </button>
+            </div>
+
+            <div class="lc-feedback" *ngIf="stage() === 'feedback'" [class.lc-feedback--correct]="lastWasCorrect()">
+                <span class="lc-feedback-status">
+                    {{ lastWasCorrect() ? 'Resposta certa' : (selectedOption() === null ? 'Tempo esgotado' : 'Quase lá')
+                    }}
+                    <strong *ngIf="lastPointsEarned() > 0">+{{ lastPointsEarned() }} pts</strong>
+                </span>
+                <p class="lc-feedback-text">{{ currentQuestion().feedback }}</p>
+                <button class="lc-btn lc-btn--primary" (click)="nextQuestion()">
+                    {{ isLastQuestion() ? 'Ver resultado' : 'Proximo desafio' }}
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="lc-result" *ngIf="stage() === 'result' && lastResult() as result">
+        <span class="lc-eyebrow">Resultado do desafio</span>
+        <div class="lc-rank-badge">{{ result.rank }}</div>
+
+        <div class="lc-result-grid">
+            <div class="lc-stat">
+                <span class="lc-stat-value">{{ result.totalScore }}</span>
+                <span class="lc-stat-label">pontos</span>
+            </div>
+            <div class="lc-stat">
+                <span class="lc-stat-value"> {{ result.correctCount }}/{{ result.totalQuestions }}</span>
+                <span class="lc-stat-label">acertos</span>
+            </div>
+            <div class="lc-stat">
+                <span class="lc-stat-value">{{ result.accuracyPercent }}%</span>
+                <span class="lc-stat-label">precisão</span>
+            </div>
+            <div class="lc-stat">
+                <span class="lc-stat-value">{{ result.averageTimeSeconds }}</span>
+                <span class="lc-stat-label">tempo médio</span>
+            </div>
+        </div>
+
+        <p class="lc-result-message">
+            Seu resultado indica facilidade em resolver problemas e identificar padrões.
+            Essas habilidade são a base de quem estuda Análise e Desenvolvimento de Sistemas.
+        </p>
+
+        <div class="lc-result-actions">
+            <button class="lc-btn lc-btn--primary" (click)="playAgain()">Jogar novamente</button>
+            <button class="lc-btn lc-btn--ghost" (click)="exit()">Voltar ao menu</button>
+        </div>
+    </section>
+
+</div>

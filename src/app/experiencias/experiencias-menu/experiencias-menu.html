@@ -1,0 +1,28 @@
+<div class="em-stage">
+    <header class="em-header">
+        <span class="em-eyebrow">Central de Experiências ADS</span>
+        <h1 class="em-title">Escolha sua experiência</h1>
+        <p class="em-subtitle">Cada desafio dura poucos segundos e revela uma habilidade diferente.</p>
+    </header>
+
+    <div class="em-grid">
+        <a 
+            *ngFor="let item of items"
+            class="em-card"
+            [class.em-card--soon]="item.status === 'coming-soon'"
+            [routerLink]="['/experiencias', item.slug]">
+
+            <span class="em-card-emoji">{{ item.emoji }}</span>
+            <h2 class="em-card-name"> {{ item.name }}</h2>
+            <p class="em-card-description">{{ item.description }}</p>
+
+            <div>
+                <span class="em-card-duration">{{ item.duration }}</span>
+                <span class="em-card-badge" *ngIf="item.status === 'coming-soon'">Em breve</span>
+                <span class="em-card-badge em-card-badge--ready" *ngIf="item.status === 'ready'">Jogar</span>
+            </div>
+        </a>
+    </div>
+
+    <a class="em-back" routerLink="/inicio"><= Voltar para a tela inicial</a>
+</div>
