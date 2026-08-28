@@ -33,9 +33,11 @@ export const routes: Routes = [
     
     {
         path: 'experiencias/banco-de-dados',
-        component: ComingSoonComponent,
-        data: { title: 'Banco de Dados', emoji: '💾' }
+        loadComponent: () => 
+            import('./experiencias/db-challenge/db-challenge')
+                .then((m) => m.DbChallenge)
     },
+
     {
         path: 'experiencias/codigo-misterioso',
         component: ComingSoonComponent,

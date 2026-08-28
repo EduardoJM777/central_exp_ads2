@@ -1,0 +1,133 @@
+<div class="db-stage">
+
+    <section class="db-intro" *ngIf="stage() === 'intro'">
+        <span class="db-eyebrow">Experiência 03 - Central de Experiências ADS</span>
+        <h1 class="db-title">Banco de <span>Dados</span></h1>
+        <p class="db-subtitle">
+            O sistema possui milhares de registros. Você precisa encontrar a informação certa.
+        </p>
+
+        <div class="db-preview">
+            <div class="db-preview-table" *ngFor="let table of tables">
+                <span class="db-preview-name">{{ table.name }}</span>
+                <span class="db-preview-cols">{{ table.columns.join(' . ') }}</span>
+            </div>
+        </div>
+
+        <button class="db-btn db-btn--primary db-btn--lg" (click)="start()">
+            Começar agora
+        </button>
+
+        <p class="db-hint">Não é necessário saber SQL. {{ questions.length }} perguntas, consultando dados reais na
+            tela.</p>
+    </section>
+
+
+
+
+
+    <section class="db-play" *ngIf="stage() === 'playing' || stage() === 'feedback'">
+
+        <header class="db-play-header">
+            <div class="db-progress-track">
+                <div class="db-progress-fill" [style.width.%]="progressPercent()"></div>
+            </div>
+            <div class="db-play-meta">
+                <span class="db-step">Consulta {{ currentIndex() + 1 }} de {{ questions.length }}</span>
+                <span class="db-score">{{ score() }} pts</span>
+            </div>
+        </header>
+
+        <div class="db-tables">
+            <div class="db-table" *ngFor="let table of tables">
+                <div class="db-table-name">{{ table.name }}</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th *ngFor="let col of table.columns">{{ col }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of table.rows">
+                            <td *ngFor="let cell of row">{{ cell }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="db-card">
+            <div class="db-card-top">
+                <span class="db-timer" [class.db-timer--low]="timeRemaining() <= 10">
+                    <span class="db-timer-bar" [style.width.%]="timeProgressPercent()"></span>
+                    <span class="db-timer-value">{{ timeRemaining() }}s</span>
+                </span>
+            </div>
+
+            <p class="db-scenario">{{ currentQuestion().scenario }}</p>
+            <h2 class="db-prompt">{{ currentQuestion().prompt }}</h2>
+
+            <div class="db-options">
+                <button *ngFor="let option of currentQuestion().options; let i = index" class="db-option"
+                    [class.db-option--selected]="selectedOption() === i"
+                    [class.db-option--correct]="stage() === 'feedback' && i === currentQuestion().correctIndex"
+                    [class.db-option--wrong]="stage() === 'feedback' && selectedOption() === i && i !== currentQuestion().correctIndex"
+                    [disabled]="stage() === 'feedback'" (click)="selectedOption(i)">
+                    {{ option }}
+                </button>
+            </div>
+
+            <div class="db-feedback" *ngIf="stage() === 'feedback'" [class.db-feedback--correct]="lastWasCorrect()">
+                <span class="db-feedback-status">
+                    {{ lastWasCorrect() ? 'Consulta correta' : (selectedOption() === null ? 'Tempo esgotado' : 'Quase lá') }}
+                    <strong *ngIf="lastPointsEarned() > 0">+{{ lastPointsEarned() }} pts</strong>
+                </span>
+                <p class="db-feedback-text">{{ currentQuestion().feedback }}</p>
+
+                <pre class="db-sql"><code>{{ currentQuestion().sql }}</code></pre>
+
+                <button class="db-btn db-btn--primary" (click)="nextQuestion()">
+                    {{ isLastQuestion() ? 'Ver resultado' : 'Próxima consulta' }}
+                </button>
+            </div>
+        </div>
+    </section>
+    
+
+
+
+
+    <section class="db-result" *ngIf="stage() === 'result' && lastResult() as result">
+        <span class="db-eyebrow">Resultado do desafio</span>
+        <div class="db-rank-badge">{{ result.rank }}</div>
+
+        <div class="db-result-grid">
+            <div class="db-stat">
+                <span class="db-stat-value">{{ result.totalScore }}</span>
+                <span class="db-stat-label">pontos</span>
+            </div>
+            <div class="db-stat">
+                <span class="db-stat-value">{{ result.correctCount }}/{{ result.totalQuestions }}</span>
+                <span class="db-stat-label">acertos</span>
+            </div>
+            <div class="db-stat">
+                <span class="db-stat-value">{{ result.accuracyPercent }}</span>
+                <span class="db-stat-label">precisão</span>
+            </div>
+            <div class="db-stat">
+                <span class="db-stat-value">{{ result.averageTimeSeconds }}s</span>
+                <span class="db-stat-label">tempo médio</span>
+            </div>
+        </div>
+
+        <p class="db-result-message">
+            Seu resultado indica facilidade em relacionar informações e interpretar dados - exatamente o que sustenta qualquer sistema por trás de um aplicativo real.
+        </p>
+
+        <div class="db-result-actions">
+            <button class="db-btn db-btn--primary" (click)="playAgain()">Jogar novamente</button>
+            <button class="db-btn db-btn--ghost" (click)="exit()">Voltar ao menu</button>
+        </div>
+    </section>
+
+</div>
