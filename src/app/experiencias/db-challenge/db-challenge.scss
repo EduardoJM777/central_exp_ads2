@@ -1,0 +1,389 @@
+:host {
+    --db-dg: #0e1420;
+    --db-surface: #161d2e;
+    --db-surface-2: #1d2740;
+    --db-border: #2a3757;
+    --db-text: #e7ecf3;
+    --db-text-muted: #8a93a6;
+    --db-violet: #a78bfa;
+    --db-teal: #5eead4;
+    --db-red: #ff6b6b;
+
+    display: block;
+    background: radial-gradient(circle at 20% -10%, #1e1a40, var(--bd-gb) 55%);
+    color: var(--db-text);
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100%;
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    box-sizing: border-box;
+}
+
+.db-stage {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.db-eyebrow {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--db-violet);
+    margin-bottom: 0.75rem;
+}
+
+.db-btn {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    padding: 0.85rem 1.6rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+    &--primary {
+        background: linear-gradient(135deg, var(--db-violet), #7c6ee0);
+        color: #150f2b;
+        box-shadow: 0 8px 24px -8px rgba(167, 139, 250, 0.55);
+
+        &:hover { transform: translateY(-2px); }
+    }
+
+    &--ghost {
+        background: transparent;
+        border-color: var(--db-border);
+        color: var(--db-text-muted);
+
+        &:hover { color: var(--db-text); border-color: var(--db-violet); }
+    }
+
+    &--lg { padding: 1rem 2.25rem; font-size: 1.05rem; }
+}
+
+
+
+
+.db-intro {
+    text-align: center;
+    padding: clamp(2rem, 6vw, 4rem) 0;
+}
+
+.db-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.25rem, 6vw, 3.5rem);
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+
+    span { color: var(--db-violet); }
+}
+
+.db-subtitle {
+    color: var(--db-text-muted);
+    font-size: 1.05rem;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+}
+
+.db-preview {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+}
+
+.db-preview-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    background: var(--db-surface);
+    border: 1px solid var(--db-border);
+    border-radius: 10px;
+    padding: 0.75rem 1.1rem;
+    text-align: left;
+}
+
+.db-preview-name {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--db-violet);
+    font-size: 0.85rem;
+}
+
+.db-preview-cols {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--db-text-muted);
+    font-size: 0.7rem;
+}
+
+.db-hint {
+    color: var(--db-text-muted);
+    font-size: 0.85rem;
+    margin-top: 1.5rem;
+}
+
+
+
+
+
+.db-play-header { margin-bottom: 1.25rem; }
+
+.db-progress-track {
+    height: 4px;
+    border-radius: 4px;
+    background: var(--db-surface);
+    overflow: hidden;
+    margin-bottom: 0.6rem;
+}
+
+.db-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--db-teal), var(--db-violet));
+    transition: width 0.3s ease;
+}
+
+.db-play-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--db-text-muted);
+}
+
+.db-score { color: var(--db-violet); }
+
+
+.db-tables {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.db-table {
+    background: var(--db-surface);
+    border: 1px solid var(--db-border);
+    border-radius: 12px;
+    padding: 0.9rem;
+    overflow-x: auto;
+}
+
+.db-table-name {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--db-violet);
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.db-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.db-table th {
+    text-align: left;
+    color: var(--db-text-muted);
+    border-bottom: 1px solid var(--db-border);
+    padding: 0.35rem 0.5rem;
+    text-transform: lowercase;
+}
+
+.db-table td {
+    padding: 0.35rem 0.5rem;
+    border-bottom: 1px solid rgba(42, 55, 87, 0.4);
+    color: var(--db-text);
+    white-space: nowrap;
+}
+
+.db-card {
+    background: var(--db-surface);
+    border: 1px solid var(--db-border);
+    border-radius: 16px;
+    padding: clamp(1.25rem, 4vw, 2.25rem);
+}
+
+.db-card-top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.25rem;
+}
+
+.db-timer {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 8px;
+    border-radius: 6px;
+    background: var(--db-surface-2);
+    overflow: hidden;
+
+    &-bar {
+        display: block;
+        height: 100%;
+        background: var(--db-teal);
+        transition: width 1s linear;
+    }
+
+    &-value {
+        position: absolute;
+        top: -1.35rem;
+        right: 0;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        color: var(--db-text-muted);
+    }
+
+    &--low .db-timer-bar { background: var(--db-red); }
+    &--low .db-timer-value { color: var(--db-red); }
+}
+
+.db-scenario {
+    color: var(--db-text-muted);
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem;
+}
+
+.db-prompt {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.35rem;
+    margin: 0 0 1.5rem;
+}
+
+.db-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+@media (max-width: 560px) {
+    .db-options { grid-template-columns: 1fr; }
+}
+
+.dp-option {
+    text-align: left;
+    background: var(--db-surface);
+    border: 1px solid var(--db-border);
+    color: var(--db-text);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+
+    &:hover:not(:disabled) { border-color: var(--db-violet); transform: translateY(-1px); }
+    &:disabled { cursor: default; }
+
+    &--selected { border-color: var(--db-violet); }
+    &--correct { border-color: var(--db-teal); box-shadow: 0 0 0 1px var(--db-teal) inset; }
+    &--wrong { border-color: var(--db-red); box-shadow: 0 0 0 1px var(--db-red) inset; }
+}
+
+.db-feedback {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px dashed var(--db-border);
+
+    &-status {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 600;
+        color: var(--db-red);
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+
+        strong { color: var(--db-violet); font-family: 'JetBrains Mono', monospace; }
+    }
+
+    &-text {
+        color: var(--db-text-muted);
+        margin: 0.6rem 0 1rem;
+        line-height: 1.5;
+    }
+}
+
+.db-sql {
+    background: #0a0e18;
+    border: 1px solid var(--db-border);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    overflow-x: auto;
+    margin: 0 0 1.25rem;
+
+    code {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.78rem;
+        color: var(--db-teal);
+        white-space: pre;
+    }
+}
+
+
+
+
+
+.db-result {
+    text-align: center;
+    padding: clamp(1.5rem, 5vw, 3rem) 0;
+}
+
+.db-rank-badge {
+    display: inline-block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+    color: var(--db-violet);
+    border: 1px solid var(--db-violet);
+    border-radius: 999px;
+    padding: 0.5rem 1.5rem;
+    margin: 0.5rem 0 2rem;
+    box-shadow: 0 0 32px -8px rgba(167, 139, 250, 0.4);
+}
+
+.db-result-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 560px) {
+    .db-result-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.db-stat {
+    background: var(--db-surface);
+    border: 1px solid var(--db-border);
+    border-radius: 12px;
+    padding: 1rem 0.5rem;
+
+    &-value {
+        display: block;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.3rem;
+        color: var(--db-teal);
+    }
+
+    &-label {
+        font-size: 0.75rem;
+        color: var(--db-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+}
+
+.db-result-message {
+    color: var(--db-text-muted);
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+}
+
+.db-result-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
