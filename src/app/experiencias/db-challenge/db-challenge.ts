@@ -8,31 +8,27 @@ import {
   signal
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LOGIC_QUESTIONS } from './logic-challenge-questions';
-import {
-  LogicAnswerLog,
-  LogicChallengeResult,
-  LogicQuestion
-} from './logic-challenge.model';
+import { DB_QUESTIONS, DB_TABLES } from './db-challenge.data';
+import { DbAnswerLog, DbChallengeResult, DbQuestion, DbTable } from './db-challenge.model';
 import { Router } from '@angular/router';
 
 type Stage = 'intro' | 'playing' | 'feedback' | 'result';
 
 @Component({
-  selector: 'app-logic-challenge',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './logic-challenge.html',
-  styleUrl: './logic-challenge.scss'
+  selector: 'app-db-challenge',
+  styleUrl: './db-challenge.scss',
+  templateUrl: './db-challenge.html',
 })
-export class LogicChallengeComponent implements OnDestroy{
+export class DbChallenge implements OnDestroy{
   private router = inject(Router);
 
-  @Output() challengeCompleted = new EventEmitter<LogicChallengeResult>();
-
+  @Output() challengeCompleted = new EventEmitter<DbChallengeResult>();
   @Output() exitRequested = new EventEmitter<void>();
 
-  readonly questions: LogicQuestion[] = LOGIC_QUESTIONS;
+  readonly tables: DbTable[] = DB_TABLES;
+  readonly questions: DbQuestion[] = DB_QUESTIONS;
 
   stage = signal<Stage>('intro');
   currentIndex = signal(0);
@@ -40,10 +36,10 @@ export class LogicChallengeComponent implements OnDestroy{
   timeRemaining = signal(0);
   score = signal(0);
   streak = signal(0);
-  answerLog = signal<LogicAnswerLog[]>([]);
+  answerLog = signal<DbAnswerLog[]>([]);
   lastWasCorrect = signal(false);
   lastPointsEarned = signal(0);
-  lastResult = signal<LogicChallengeResult | null>(null);
+  lastResult = signal<DbChallengeResult | null>(null);
 
   private timerHandle: ReturnType<typeof setInterval> | null = null;
   private questionStartedAt = 0;
@@ -54,14 +50,14 @@ export class LogicChallengeComponent implements OnDestroy{
     () => (this.currentIndex() / this.questions.length) * 100
   );
 
-  readonly timeProgressPercent = computed(() => {
+  readonly timeProgressPercent = computed (() => {
     const q = this.currentQuestion();
     if (!q) return 0;
     return Math.max(0, Math.round((this.timeRemaining() / q.timeLimitSeconds) * 100));
   });
 
   readonly isLastQuestion = computed(
-    () => this.currentIndex() === this.questions.length - 1
+    () => this.currentIndex() === this.questions.length -1
   );
 
   start(): void {
@@ -128,7 +124,6 @@ export class LogicChallengeComponent implements OnDestroy{
       ...log,
       {
         questionId: q.id,
-        type: q.type,
         correct,
         timeSpentSeconds: timeSpent,
         pointsEarned: points
@@ -156,7 +151,7 @@ export class LogicChallengeComponent implements OnDestroy{
       log.reduce((sum, a) => sum + a.timeSpentSeconds, 0) / totalQuestions
     );
 
-    const result: LogicChallengeResult = {
+    const result: DbChallengeResult = {
       visitorAlias: null,
       totalScore: this.score(),
       correctCount,
@@ -173,11 +168,11 @@ export class LogicChallengeComponent implements OnDestroy{
   }
 
   private rankFor(accuracyPercent: number): string {
-    if (accuracyPercent >= 90) return 'Arquiteto(a) de Sistemas';
-    if (accuracyPercent >= 70) return 'Desenvolvedor(a) Sênior';
-    if (accuracyPercent >= 50) return 'Desenvolvedor(a) Pleno';
-    if (accuracyPercent >= 30) return 'Desenvolvedor(a) Júnior';
-    return 'Estagiário(a) Curioso(a)';
+    if (accuracyPercent >= 90) return 'DBA - Administrador(a) de Banco de Dados';
+    if (accuracyPercent >= 70) return 'Analista de Dados Sênior';
+    if (accuracyPercent >= 50) return 'Analista de Dados Pleno';
+    if (accuracyPercent >= 30) return 'Analista de Dados Júnior';
+    return 'Estagiário(a) de Dados';
   }
 
   playAgain(): void {
@@ -192,13 +187,13 @@ export class LogicChallengeComponent implements OnDestroy{
 
   private clearTimer(): void {
     if (this.timerHandle) {
-      clearInterval(this.timerHandle); 
+      clearInterval(this.timerHandle);
       this.timerHandle = null;
     }
   }
 
   ngOnDestroy(): void {
-    this.clearTimer();
+    this.clearTimer;
   }
 
 }

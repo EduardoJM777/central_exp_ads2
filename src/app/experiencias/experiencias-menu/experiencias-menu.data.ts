@@ -26,7 +26,7 @@ export const EXPERIENCE_MENU_ITEMS: ExperienceMenuItem[] = [
         description: 'Relaciona informações para encontrar um resultado.',
         concepts: 'Modelagem, consultas, relacionamentos',
         duration: '45-60s',
-        status: 'coming-soon'
+        status: 'ready'
     },
     {
         slug: 'codigo-misterioso',
