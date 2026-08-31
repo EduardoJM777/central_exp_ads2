@@ -72,7 +72,7 @@
                     [class.db-option--selected]="selectedOption() === i"
                     [class.db-option--correct]="stage() === 'feedback' && i === currentQuestion().correctIndex"
                     [class.db-option--wrong]="stage() === 'feedback' && selectedOption() === i && i !== currentQuestion().correctIndex"
-                    [disabled]="stage() === 'feedback'" (click)="selectedOption(i)">
+                    [disabled]="stage() === 'feedback'" (click)="selectOption(i)">
                     {{ option }}
                 </button>
             </div>

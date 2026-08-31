@@ -187,7 +187,7 @@ export class LogicChallengeComponent implements OnDestroy{
   exit(): void {
     this.clearTimer();
     this.exitRequested.emit();
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/experiencias');
   }
 
   private clearTimer(): void {
