@@ -38,15 +38,6 @@ export const EXPERIENCE_MENU_ITEMS: ExperienceMenuItem[] = [
         status: 'coming-soon'
     },
     {
-        slug: 'desafio-ia',
-        emoji: '🤖',
-        name: 'Desafio da IA',
-        description: 'Classifica informações ou interage com um agente.',
-        concepts: 'IA, dados, linguagem natural',
-        duration: '45-90s',
-        status: 'coming-soon'
-    },
-    {
         slug: 'cidade-inteligente',
         emoji: '🏙',
         name: 'Cidade Inteligente',

@@ -1,0 +1,21 @@
+.app-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+
+    text-align: center;
+    padding: 0.4rem 1rem;
+
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    color: #afb5c1;
+
+    background: rgba(14, 20, 32, 0.75);
+    backdrop-filter: blur(4px);
+    border-top: 1px solid #2a3757;
+
+    pointer-events: none;
+}
