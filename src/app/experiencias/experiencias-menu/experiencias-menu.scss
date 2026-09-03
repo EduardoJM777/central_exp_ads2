@@ -11,7 +11,7 @@
     background: radial-gradient(circle at 80% -10%, #1a2440 0%, var(--em-bg) 55%);
     color: var(--em-text);
     font-family: 'Inter', system-ui, sans-serif;
-    min-height: 100%;
+    min-height: 100vh;
     padding: clamp(1.5rem, 4vw, 3.5rem);
     box-sizing: border-box;
 }
@@ -113,7 +113,6 @@
     color: var(--em-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    margin-left: 8px;
 
     &--ready {
         border-color: var(--em-amber);

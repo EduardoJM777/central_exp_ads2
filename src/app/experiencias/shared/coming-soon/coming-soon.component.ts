@@ -17,7 +17,7 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
     styles: [`
         :host {
             display: block;
-            min-height: 100%;
+            min-height: 100vh;
             background: #0e1420;
             color: #e7ecf3;
             font-family: 'Inter', system-ui, sans-serif;

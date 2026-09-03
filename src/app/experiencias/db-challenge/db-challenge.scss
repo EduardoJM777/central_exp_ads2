@@ -14,7 +14,7 @@
     background: radial-gradient(circle at 20% -10%, #1e1a40, var(--bd-gb) 55%);
     color: var(--db-text);
     font-family: 'Inter', system-ui, sans-serif;
-    min-height: 100%;
+    min-height: 100vh;
     padding: clamp(1.5rem, 4vw, 3.5rem);
     box-sizing: border-box;
 }
@@ -265,7 +265,7 @@
 
 .dp-option {
     text-align: left;
-    background: var(--db-surface);
+    background: var(--db-surface-2);
     border: 1px solid var(--db-border);
     color: var(--db-text);
     border-radius: 10px;

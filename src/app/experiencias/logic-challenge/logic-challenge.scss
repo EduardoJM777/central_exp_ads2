@@ -13,7 +13,7 @@
     background: radial-gradient(circle at 20% -10%, #1a2440 0%, var(--lc-bg) 55%);
     color: var(--lc-text);
     font-family: 'Inter', system-ui, sans-serif;
-    min-height: 100%;
+    min-height: 100vh;
     padding: clamp(1.5rem, 4vw, 3.5rem);
     box-sizing: border-box;
 }
