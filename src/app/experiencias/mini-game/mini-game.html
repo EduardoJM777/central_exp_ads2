@@ -1,0 +1,54 @@
+<main class="mg-stage">
+  <section class="mg-intro" *ngIf="stage === 'intro'">
+    <span class="mg-eyebrow">Experiência 07 - Central de Experiências ADS</span>
+    <h1 class="mg-title">Missão <span>Debug</span></h1>
+    <p class="mg-subtitle">Guie o personagem até a saída, desvie dos bugs e colete boas decisões pelo caminho.</p>
+    <div class="mg-trace" aria-hidden="true"><b>🤖</b><i></i><b>⭐</b><i></i><b>🐛</b><i></i><b class="mg-goal">🚪</b></div>
+    <button class="mg-btn mg-btn--primary mg-btn--large" (click)="start()">Começar agora</button>
+    <p class="mg-hint">Use as setas do teclado ou os botões na tela. Você tem 1 minuto.</p>
+  </section>
+
+  <section class="mg-play" *ngIf="stage === 'playing' || stage === 'door'">
+    <header class="mg-play-header">
+      <div class="mg-progress"><div [style.width.%]="(timeRemaining / 60) * 100"></div></div>
+      <div class="mg-meta"><span>{{ score }} pts</span><span [class.mg-time--low]="timeRemaining <= 10">{{ timeRemaining }}s</span></div>
+    </header>
+    <div class="mg-layout">
+      <div class="mg-board" aria-label="Tabuleiro do Mini Game">
+        <ng-container *ngFor="let row of rows">
+          <div *ngFor="let column of columns" class="mg-cell" [ngClass]="cellClass(row, column)">
+            <span *ngIf="player.row === row && player.column === column">🤖</span>
+            <span *ngIf="bugs.has(row + '-' + column)">🐛</span>
+            <span *ngIf="coins.has(row + '-' + column)">⭐</span>
+            <span *ngIf="row === 0 && column === 2">🚪</span>
+          </div>
+        </ng-container>
+      </div>
+      <aside class="mg-panel">
+        <span class="mg-tag">Objetivo</span>
+        <h2>Chegue até a porta</h2>
+        <p>{{ message }}</p>
+        <div class="mg-controls" *ngIf="stage === 'playing'">
+          <button aria-label="Mover para cima" (click)="move(-1, 0)">↑</button>
+          <button aria-label="Mover para esquerda" (click)="move(0, -1)">←</button>
+          <button aria-label="Mover para baixo" (click)="move(1, 0)">↓</button>
+          <button aria-label="Mover para direita" (click)="move(0, 1)">→</button>
+        </div>
+        <div class="mg-door" *ngIf="stage === 'door'">
+          <h3>Um bug bloqueou a porta. Qual é a melhor decisão?</h3>
+          <button *ngFor="let option of doorOptions" (click)="answerDoor(option.correct)">{{ option.text }}</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="mg-result" *ngIf="stage === 'result'">
+    <span class="mg-eyebrow">Resultado do Mini Game</span>
+    <div class="mg-trophy">{{ result === 'won' ? '🏆' : '⏱️' }}</div>
+    <h1 class="mg-title">{{ result === 'won' ? 'Missão' : 'Tempo' }} <span>{{ result === 'won' ? 'concluída!' : 'esgotado' }}</span></h1>
+    <p class="mg-score">{{ score }} <small>pontos</small></p>
+    <p class="mg-message">Este jogo também é um sistema. Interface, regras, eventos, lógica, programação e testes estão por trás dele.</p>
+    <button class="mg-btn mg-btn--primary" (click)="start()">Jogar novamente</button>
+    <a class="mg-btn mg-btn--ghost" routerLink="/experiencias">Voltar ao menu</a>
+  </section>
+</main>

@@ -62,6 +62,6 @@ export const EXPERIENCE_MENU_ITEMS: ExperienceMenuItem[] = [
         description: 'Joga uma fase curta com desafios.',
         concepts: 'Lógica, eventos, interface, programação',
         duration: '60-120s',
-        status: 'coming-soon'
+        status: 'ready'
     }
 ];

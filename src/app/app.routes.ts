@@ -51,7 +51,9 @@ export const routes: Routes = [
     },
     {
         path: 'experiencias/mini-game',
-        component: ComingSoonComponent,
+        loadComponent: () =>
+            import('./experiencias/mini-game/mini-game')
+                .then((m) => m.MiniGameComponent),
         data: { title: 'Mini Game ADS', emoji: '🎮' }
     },
 
