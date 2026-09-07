@@ -54,5 +54,14 @@ export const EXPERIENCE_MENU_ITEMS: ExperienceMenuItem[] = [
         concepts: 'Lógica, eventos, interface, programação',
         duration: '60-120s',
         status: 'ready'
+    },
+    {
+        slug: 'testador-senhas',
+        emoji: '🔑',
+        name: 'Testador de Senhas',
+        description: 'Digite uma senha e veja o quão forte ela é, na hora.',
+        concepts: 'Segurança, entropia, força bruta',
+        duration: '30-90s',
+        status: 'ready'
     }
 ];

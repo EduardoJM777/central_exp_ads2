@@ -44,21 +44,24 @@ export const routes: Routes = [
         data: { title: 'Código Misterioso', emoji: '💻' }
     },
     {
-        path: 'experiencias/desafio-ia',
-        component: ComingSoonComponent,
-        data: { title: 'Desafio da IA', emoji: '🤖' }
-    },
-    {
         path: 'experiencias/cidade-inteligente',
         component: ComingSoonComponent,
         data: { title: 'Cidade Inteligente', emoji: '🏙' }
     },
+
     {
         path: 'experiencias/mini-game',
         loadComponent: () =>
             import('./experiencias/mini-game/mini-game')
                 .then((m) => m.MiniGameComponent),
         data: { title: 'Mini Game ADS', emoji: '🎮' }
+    },
+
+    {
+        path: 'experiencias/testador-senhas',
+        loadComponent: () =>
+            import('./experiencias/password-tester/password-tester')
+            .then((m) => m.PasswordTester)
     },
 
     { path: '**', redirectTo: 'inicio' }
