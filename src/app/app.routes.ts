@@ -39,10 +39,19 @@ export const routes: Routes = [
     },
 
     {
-        path: 'experiencias/codigo-misterioso',
-        component: ComingSoonComponent,
-        data: { title: 'Código Misterioso', emoji: '💻' }
-    },
+    path: 'experiencias/codigo-misterioso',
+
+    loadComponent: () =>
+
+        import(
+            './experiencias/codigo-misterioso/codigo-misterioso'
+        )
+
+        .then(
+            (m) =>
+                m.MysteryCodeComponent
+        )
+},
     {
         path: 'experiencias/cidade-inteligente',
         component: ComingSoonComponent,

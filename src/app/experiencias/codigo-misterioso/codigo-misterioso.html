@@ -1,0 +1,508 @@
+<div class="mc-stage">
+
+
+  <!-- TELA INICIAL -->
+
+  <section
+    class="mc-intro"
+    *ngIf="stage() === 'intro'">
+
+
+    <span class="mc-eyebrow">
+
+      Experiência 04 ·
+      Central de Experiências ADS
+
+    </span>
+
+
+    <h1 class="mc-title">
+
+      Código
+      <span>Misterioso</span>
+
+    </h1>
+
+
+    <p class="mc-subtitle">
+
+      Você não precisa saber programar.
+
+      Leia as pistas,
+      escolha uma resposta
+      e descubra como o computador pensa.
+
+    </p>
+
+
+    <div class="mc-terminal">
+
+      <div class="mc-terminal-top">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+        <strong>
+          codigo_misterioso.ads
+        </strong>
+
+      </div>
+
+
+      <pre><code>NOME = "Você"
+
+SE curiosidade = verdadeira
+
+    MOSTRE "Desafio aceito!"
+
+FIM</code></pre>
+
+    </div>
+
+
+    <div class="mc-intro-tags">
+
+      <span>variáveis</span>
+
+      <span>decisões</span>
+
+      <span>repetições</span>
+
+      <span>bugs</span>
+
+    </div>
+
+
+    <button
+      class="mc-btn mc-btn--primary mc-btn--lg"
+      (click)="start()">
+
+      Decifrar código
+
+    </button>
+
+
+    <p class="mc-hint">
+
+      5 desafios rápidos ·
+      pontuação por acerto e velocidade
+
+    </p>
+
+
+  </section>
+
+
+
+  <!-- JOGO -->
+
+
+  <section
+    class="mc-play"
+    *ngIf="
+      stage() === 'playing'
+      ||
+      stage() === 'feedback'
+    ">
+
+
+    <header class="mc-play-header">
+
+
+      <div class="mc-progress-track">
+
+        <div
+          class="mc-progress-fill"
+          [style.width.%]="progressPercent()">
+
+        </div>
+
+      </div>
+
+
+      <div class="mc-play-meta">
+
+        <span>
+
+          Desafio
+          {{ currentIndex() + 1 }}
+          de
+          {{ questions.length }}
+
+        </span>
+
+
+        <span class="mc-score">
+
+          {{ score() }} pts
+
+        </span>
+
+      </div>
+
+
+    </header>
+
+
+
+    <div class="mc-card">
+
+
+      <div class="mc-card-top">
+
+
+        <span class="mc-level">
+
+          {{ currentQuestion().level }}
+
+        </span>
+
+
+        <div
+          class="mc-timer"
+          [class.mc-timer--low]="
+            timeRemaining() <= 8
+          ">
+
+
+          <div
+            class="mc-timer-bar"
+            [style.width.%]="
+              timeProgressPercent()
+            ">
+
+          </div>
+
+
+          <span>
+
+            {{ timeRemaining() }}s
+
+          </span>
+
+
+        </div>
+
+
+      </div>
+
+
+
+      <h2 class="mc-question-title">
+
+        {{ currentQuestion().title }}
+
+      </h2>
+
+
+      <p class="mc-explanation">
+
+        {{ currentQuestion().explanation }}
+
+      </p>
+
+
+
+      <div class="mc-code-box">
+
+
+        <div class="mc-code-label">
+
+          PSEUDOCÓDIGO
+
+        </div>
+
+
+        <pre><code>{{ currentQuestion().code }}</code></pre>
+
+
+      </div>
+
+
+
+      <h3 class="mc-prompt">
+
+        {{ currentQuestion().prompt }}
+
+      </h3>
+
+
+
+      <div class="mc-options">
+
+
+        <button
+
+          *ngFor="
+            let option of currentQuestion().options;
+            let i = index
+          "
+
+          class="mc-option"
+
+          [class.mc-option--selected]="
+            selectedOption() === i
+          "
+
+          [class.mc-option--correct]="
+            stage() === 'feedback'
+            &&
+            i === currentQuestion().correctIndex
+          "
+
+          [class.mc-option--wrong]="
+            stage() === 'feedback'
+            &&
+            selectedOption() === i
+            &&
+            i !== currentQuestion().correctIndex
+          "
+
+          [disabled]="
+            stage() === 'feedback'
+          "
+
+          (click)="selectOption(i)">
+
+
+          <span class="mc-option-letter">
+
+            {{ ['A','B','C','D'][i] }}
+
+          </span>
+
+
+          <span>
+
+            {{ option }}
+
+          </span>
+
+
+        </button>
+
+
+      </div>
+
+
+
+      <!-- FEEDBACK -->
+
+
+      <div
+        class="mc-feedback"
+
+        *ngIf="
+          stage() === 'feedback'
+        "
+
+        [class.mc-feedback--correct]="
+          lastWasCorrect()
+        ">
+
+
+        <div class="mc-feedback-title">
+
+
+          <span>
+
+            {{
+              lastWasCorrect()
+              ? 'Código decifrado!'
+              : 'Quase! Veja a lógica.'
+            }}
+
+          </span>
+
+
+          <strong
+            *ngIf="
+              lastPointsEarned() > 0
+            ">
+
+            +{{ lastPointsEarned() }}
+            pts
+
+          </strong>
+
+
+        </div>
+
+
+
+        <p>
+
+          {{ currentQuestion().feedback }}
+
+        </p>
+
+
+
+        <button
+
+          class="mc-btn mc-btn--primary"
+
+          (click)="nextQuestion()">
+
+
+          {{
+            isLastQuestion()
+            ? 'Ver meu resultado'
+            : 'Próximo código'
+          }}
+
+
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- RESULTADO -->
+
+
+  <section
+    class="mc-result"
+    *ngIf="stage() === 'result'">
+
+
+    <span class="mc-eyebrow">
+
+      Missão concluída
+
+    </span>
+
+
+    <h1 class="mc-result-title">
+
+      {{ resultTitle() }}
+
+    </h1>
+
+
+    <p class="mc-result-subtitle">
+
+      Você acabou de pensar como
+      um desenvolvedor sem precisar
+      conhecer uma linguagem de programação.
+
+    </p>
+
+
+
+    <div class="mc-result-grid">
+
+
+      <div class="mc-stat">
+
+        <strong>
+          {{ score() }}
+        </strong>
+
+        <span>
+          pontos
+        </span>
+
+      </div>
+
+
+      <div class="mc-stat">
+
+        <strong>
+
+          {{ correctAnswers() }}
+          /
+          {{ questions.length }}
+
+        </strong>
+
+        <span>
+          acertos
+        </span>
+
+      </div>
+
+
+      <div class="mc-stat">
+
+        <strong>
+
+          {{ accuracy() }}%
+
+        </strong>
+
+        <span>
+          precisão
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+
+    <div class="mc-learning-box">
+
+      <span>
+
+        O que você usou?
+
+      </span>
+
+
+      <p>
+
+        Variáveis, decisões,
+        repetições e correção de erros.
+
+        Esses são conceitos reais
+        usados no desenvolvimento
+        de sistemas.
+
+      </p>
+
+    </div>
+
+
+
+    <div class="mc-result-actions">
+
+
+      <button
+
+        class="mc-btn mc-btn--primary"
+
+        (click)="playAgain()">
+
+        Jogar novamente
+
+      </button>
+
+
+      <button
+
+        class="mc-btn mc-btn--ghost"
+
+        (click)="exit()">
+
+        Voltar ao menu
+
+      </button>
+
+
+    </div>
+
+
+  </section>
+
+
+</div>

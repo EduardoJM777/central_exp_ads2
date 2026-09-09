@@ -35,7 +35,7 @@ export const EXPERIENCE_MENU_ITEMS: ExperienceMenuItem[] = [
         description: 'Completa ou interpreta pequenos trechos de código.',
         concepts: 'Programação, variáveis, condições',
         duration: '30-60s',
-        status: 'coming-soon'
+        status: 'ready'
     },
     {
         slug: 'cidade-inteligente',
