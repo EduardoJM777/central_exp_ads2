@@ -6,7 +6,7 @@ import type { AnswerResult, Challenge, GameSession, RankingResponse } from '../m
 @Injectable({ providedIn: 'root' })
 export class GameApiService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:3333/api';
+  private readonly apiUrl = 'https://sistema-invadido-api.onrender.com/api';
 
   createSession(nickname: string): Observable<GameSession> {
     return this.http.post<GameSession>(`${this.apiUrl}/sessions`, { nickname });
