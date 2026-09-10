@@ -8,4 +8,5 @@ export interface ExperienceMenuItem {
     concepts: string;
     duration: string;
     status: ExperienceStatus;
+    url?: string;
 }

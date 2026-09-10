@@ -1,0 +1,136 @@
+<div class="ambient-grid" aria-hidden="true"></div>
+<header class="topbar">
+  <button class="brand" type="button" (click)="home()"><span class="brand-icon">C+</span><span><b>MINHA CIDADE</b><small>SIMULADOR URBANO ADS</small></span></button>
+  <div class="network"><i></i> CIDADE CONECTADA <span>{{ participants() }} gestores</span></div>
+</header>
+
+<main>
+  @if (screen() === 'start') {
+    <section class="start-screen">
+      <div class="hero">
+        <p class="eyebrow">SIMULADOR DE CIDADE INTELIGENTE</p>
+        <h1>CRIE UMA CIDADE<br><em>MELHOR PARA VIVER.</em></h1>
+        <p class="lead">Conheça os moradores, acompanhe a rotina dos bairros e tome decisões que mudam a cidade diante dos seus olhos.</p>
+        <form class="start-form" (ngSubmit)="startGame()">
+          <label for="nickname">NOME DO(A) GESTOR(A)</label>
+          <div class="name-input"><span>ID</span><input id="nickname" name="nickname" [(ngModel)]="nickname" maxlength="18" autocomplete="off" placeholder="Digite seu apelido"></div>
+          @if (error()) { <p class="error" role="alert">{{ error() }}</p> }
+          <button class="primary" type="submit" [disabled]="loading()"><span>{{ loading() ? 'CONECTANDO À CIDADE...' : 'ASSUMIR O CONTROLE' }}</span><b>→</b></button>
+        </form>
+        <div class="quick-stats"><span><b>05</b> DECISÕES</span><span><b>10</b> SITUAÇÕES POSSÍVEIS</span><span><b>R$ 20 MI</b> EM CAIXA</span></div>
+      </div>
+      <div class="city-preview">
+        <div class="preview-header"><span>VISÃO GERAL // TEMPO REAL</span><i>ONLINE</i></div>
+        <div class="mini-city" aria-hidden="true">
+          <img src="city-isometric.png" alt=""><div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div>
+          <div class="tower t1"><i></i><i></i><i></i></div><div class="tower t2"><i></i><i></i></div><div class="tower t3"><i></i><i></i><i></i></div><div class="tower t4"><i></i><i></i></div>
+          <div class="road horizontal"><span class="car car1"></span><span class="car car2"></span></div><div class="road vertical"><span class="car car3"></span></div>
+          <div class="tree tr1">♣</div><div class="tree tr2">♣</div><div class="tree tr3">♣</div>
+          <div class="mini-person mp1"><i></i><b></b></div><div class="mini-person mp2"><i></i><b></b></div>
+          <div class="welcome-bubble">Olá, gestor! Nossa cidade precisa de você.</div>
+        </div>
+        <div class="preview-metrics"><div><span>Mobilidade</span><b>62</b></div><div><span>Energia limpa</span><b>58</b></div><div><span>Segurança</span><b>65</b></div></div>
+        <button class="rank-link" type="button" (click)="showRanking()">VER RANKING DE GESTORES <span>→</span></button>
+      </div>
+    </section>
+  }
+
+  @if (screen() === 'game' && scenario(); as event) {
+    <section class="dashboard">
+      <div class="dashboard-head">
+        <div><p class="eyebrow">MANDATO DE {{ nickname.toUpperCase() }}</p><h2>DECISÃO {{ round() }}<span>/{{ totalRounds() }}</span></h2></div>
+        <div class="treasury-card"><small>CAIXA DA PREFEITURA</small><strong>{{ money(treasury()) }}</strong><i>Disponível para investir</i></div>
+        <div class="city-score"><small>ÍNDICE DA CIDADE</small><strong>{{ cityIndex() }}</strong><i>/100</i></div>
+        <div class="total-score"><small>PONTUAÇÃO</small><strong>{{ score() }}</strong></div>
+      </div>
+      <div class="round-progress"><i [style.width.%]="round() / totalRounds() * 100"></i></div>
+
+      <div class="dashboard-grid">
+        <div class="map-panel" [class.storm]="event.id === 'storm-water'" [class.pollution]="event.id === 'air-quality'" [class.energy]="event.category === 'ENERGIA'">
+          <div class="panel-title"><span>BAIRRO CENTRAL</span><b>● ACONTECENDO AGORA</b></div>
+          <div class="city-map" aria-label="Mapa animado da cidade">
+            <img class="isometric-city" src="city-isometric.png" alt="Cidade inteligente isométrica com bairros, ruas, parque, escola e hospital">
+            <div class="map-sky"><span class="map-sun"></span><i class="rain r1"></i><i class="rain r2"></i><i class="rain r3"></i></div>
+            <div class="building b1"><span></span><span></span><span></span></div><div class="building b2"><span></span><span></span></div><div class="building b3"><span></span><span></span><span></span></div><div class="building b4"><span></span><span></span></div><div class="building b5"><span></span><span></span><span></span></div>
+            <div class="sim-house house1"><i class="roof"></i><span class="door"></span><b class="window"></b></div><div class="sim-house house2"><i class="roof"></i><span class="door"></span><b class="window"></b></div>
+            <div class="map-road road-x"><i class="vehicle v1"></i><i class="vehicle v2"></i><i class="bus"></i></div><div class="map-road road-y"><i class="vehicle v3"></i></div>
+            <div class="crosswalk"><i></i><i></i><i></i><i></i></div><div class="park"><i>♣</i><i>♣</i><i>♣</i><span class="bench"></span></div><div class="river"></div>
+            <div class="sensor s1">◉<span>S-01</span></div><div class="sensor s2">◉<span>S-02</span></div><div class="sensor s3">◉<span>S-03</span></div>
+            <div class="citizen citizen-1"><span class="thought">Como está o trânsito?</span><i class="hair"></i><b class="face"></b><em class="shirt"></em><small class="legs"></small></div>
+            <div class="citizen citizen-2"><span class="thought">Quero um parque seguro!</span><i class="hair"></i><b class="face"></b><em class="shirt"></em><small class="legs"></small></div>
+            <div class="citizen citizen-3"><i class="hair"></i><b class="face"></b><em class="shirt"></em><small class="legs"></small></div>
+            <div class="cyclist"><i></i><b></b><span></span></div>
+            <div class="plumbob">◆</div>
+          </div>
+          <div class="data-stream"><span>▣ {{ event.liveData }}</span><i>Dados atualizados agora</i></div>
+        </div>
+
+        <aside class="decision-panel">
+          <div class="alert-line"><i>!</i><span>{{ event.alert }}</span><b>{{ event.category }}</b></div>
+          <h3>{{ event.title }}</h3><p>{{ event.description }}</p>
+          <small class="choose-label">O QUE VOCÊ FARIA?</small>
+          <div class="decisions">
+            @for (decision of event.decisions; track decision.id; let index = $index) {
+              <button type="button" (click)="choose(decision)" [disabled]="loading() || !canAfford(decision)" [class.unaffordable]="!canAfford(decision)">
+                <span class="decision-number">0{{ index + 1 }}</span><span class="decision-copy"><b>{{ decision.title }}</b><small>{{ decision.description }}</small><i>{{ decision.technology }}</i></span><span class="investment"><small>INVESTIMENTO</small><b>{{ money(decision.investment) }}</b></span>
+              </button>
+            }
+          </div>
+        </aside>
+      </div>
+
+      <div class="metrics-row">
+        @for (metric of metricList; track metric.key) {
+          <div class="metric"><span class="metric-icon">{{ metric.icon }}</span><div><small>{{ metric.label }}</small><div class="bar"><i [style.width.%]="metricValue(metric.key)"></i></div></div><b>{{ metricValue(metric.key) }}</b></div>
+        }
+      </div>
+    </section>
+  }
+
+  @if (screen() === 'impact' && impact(); as result) {
+    <section class="impact-screen">
+      <p class="eyebrow">RESULTADO DA SUA ESCOLHA</p><h2>A CIDADE <em>REAGIU.</em></h2><p class="impact-text">{{ result.outcome }}</p>
+      <div class="technology-used"><span>TECNOLOGIA UTILIZADA</span><b>{{ result.technology }}</b></div>
+      <div class="investment-impact"><small>INVESTIMENTO APROVADO</small><strong>{{ money(result.investment) }}</strong><span>Saldo da prefeitura: {{ money(result.treasury) }}</span></div>
+      <div class="impact-metrics">
+        @for (metric of metricList; track metric.key) {
+          <div [class.positive]="effectValue(metric.key) > 0" [class.negative]="effectValue(metric.key) < 0"><span>{{ metric.icon }}</span><small>{{ metric.label }}</small><b>{{ effectValue(metric.key) === 0 ? '—' : effectText(metric.key) }}</b></div>
+        }
+      </div>
+      <div class="round-points"><span>+{{ result.roundScore }}</span> PONTOS DE GESTÃO</div>
+      <button class="primary compact" type="button" (click)="continueGame()"><span>{{ result.completed ? 'VER RESULTADO DA CIDADE' : 'PRÓXIMO ALERTA' }}</span><b>→</b></button>
+    </section>
+  }
+
+  @if (screen() === 'result') {
+    <section class="result-screen">
+      <p class="eyebrow">FIM DA TEMPORADA</p><h2>{{ cityProfile() }}</h2><p>Seus moradores sentiram cada decisão. Você usou tecnologia para equilibrar necessidades reais da cidade.</p>
+      <div class="city-index-ring"><span>{{ cityIndex() }}</span><small>ÍNDICE FINAL</small></div>
+      <div class="result-summary"><div><small>GESTOR(A)</small><b>{{ nickname }}</b></div><div><small>PONTUAÇÃO</small><b>{{ score() }}</b></div><div><small>DECISÕES</small><b>{{ history().length }}/{{ totalRounds() }}</b></div></div>
+      <section class="financial-report">
+        <div class="report-head"><div><small>PRESTAÇÃO DE CONTAS</small><h3>Relatório do mandato</h3></div><div><span>TOTAL INVESTIDO</span><strong>{{ money(totalInvestment()) }}</strong></div><div><span>SALDO FINAL</span><strong>{{ money(treasury()) }}</strong></div></div>
+        <div class="decision-history">
+          @for (item of history(); track item.round) {
+            <article><span class="history-round">{{ item.round }}</span><div><small>{{ item.scenario }}</small><b>{{ item.decision }}</b><i>{{ item.technology }}</i></div><strong>{{ money(item.investment) }}</strong></article>
+          }
+        </div>
+        <div class="fiscal-purpose">
+          <div class="reserve-icon">▰</div><div><small>DESTINO DO SALDO</small><h4>Fundo Municipal de Emergência</h4><p>{{ fiscalMessage() }}</p><div class="reserve-bar"><i [style.width.%]="reserveProgress()"></i></div><span>Meta de reserva: {{ money(reserveTarget()) }}</span></div>
+          <div class="fiscal-grade"><small>{{ fiscalStatus() }}</small><strong>+{{ fiscalBonus() }}</strong><span>BÔNUS FISCAL</span></div>
+        </div>
+      </section>
+      <div class="course-message"><span>VOCÊ ACABOU DE USAR CONCEITOS DE ADS</span><p>Dados, APIs, Internet das Coisas, regras de negócio, interface e tomada de decisão trabalham juntos por trás desta cidade.</p></div>
+      <div class="actions"><button class="primary compact" type="button" (click)="home()"><span>GERENCIAR NOVA CIDADE</span><b>↻</b></button><button class="secondary" type="button" (click)="showRanking()">VER RANKING</button></div>
+    </section>
+  }
+
+  @if (screen() === 'ranking') {
+    <section class="ranking-screen"><p class="eyebrow">MELHORES CIDADES</p><h2>RANKING DE GESTORES</h2>
+      <div class="ranking-table"><div class="ranking-row header"><span>POS.</span><span>GESTOR(A)</span><span>ÍNDICE</span><span>PONTOS</span></div>
+        @for (entry of ranking(); track entry.id; let index = $index) { <div class="ranking-row" [class.top]="index < 3"><span>{{ rank(index) }}</span><b>{{ entry.nickname }}</b><span>{{ entry.cityIndex }}/100</span><strong>{{ entry.score }}</strong></div> }
+        @empty { <div class="empty">Ainda não há cidades no ranking.</div> }
+      </div><button class="primary compact" type="button" (click)="home()"><span>VOLTAR AO INÍCIO</span><b>←</b></button>
+    </section>
+  }
+</main>
+<footer><span>UPX • ANÁLISE E DESENVOLVIMENTO DE SISTEMAS</span><span>SIMULAÇÃO EDUCACIONAL • DADOS 100% FICTÍCIOS</span></footer>

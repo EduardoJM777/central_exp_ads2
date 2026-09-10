@@ -16,8 +16,9 @@ export const EXPERIENCE_MENU_ITEMS: ExperienceMenuItem[] = [
         name: 'Sistema Invadido',
         description: 'Investiga pistas para descobrir uma senha ou usuário.',
         concepts: 'Segurança, lógica, dados',
-        duration: '60-90s',
-        status: 'ready'
+        duration: '3-5 min',
+        status: 'ready',
+        url: 'http://localhost:4200'
     },
     {
         slug: 'banco-de-dados',
@@ -41,10 +42,11 @@ export const EXPERIENCE_MENU_ITEMS: ExperienceMenuItem[] = [
         slug: 'cidade-inteligente',
         emoji: '🏙',
         name: 'Cidade Inteligente',
-        description: 'Toma decisões para melhorar uma cidade simulada.',
+        description: 'Assuma a prefeitura, invista o orçamento e transforme uma cidade viva.',
         concepts: 'Dados, APIs, sistemas, IoT',
-        duration: '60-120s',
-        status: 'coming-soon'
+        duration: '4-6 min',
+        status: 'ready',
+        url: 'http://localhost:4201'
     },
     {
         slug: 'mini-game',

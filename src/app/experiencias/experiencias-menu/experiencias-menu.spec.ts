@@ -1,16 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ExperienciasMenu } from './experiencias-menu';
+import { ExperienciasMenuComponent } from './experiencias-menu';
+import { provideRouter } from '@angular/router';
 
 describe('ExperienciasMenu', () => {
-  let component: ExperienciasMenu;
-  let fixture: ComponentFixture<ExperienciasMenu>;
+  let component: ExperienciasMenuComponent;
+  let fixture: ComponentFixture<ExperienciasMenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExperienciasMenu],
+      imports: [ExperienciasMenuComponent],
+      providers: [provideRouter([])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ExperienciasMenu);
+    fixture = TestBed.createComponent(ExperienciasMenuComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

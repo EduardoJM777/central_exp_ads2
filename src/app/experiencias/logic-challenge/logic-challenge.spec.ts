@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LogicChallenge } from './logic-challenge';
+import { LogicChallengeComponent } from './logic-challenge';
 
 describe('LogicChallenge', () => {
-  let component: LogicChallenge;
-  let fixture: ComponentFixture<LogicChallenge>;
+  let component: LogicChallengeComponent;
+  let fixture: ComponentFixture<LogicChallengeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LogicChallenge],
+      imports: [LogicChallengeComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LogicChallenge);
+    fixture = TestBed.createComponent(LogicChallengeComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

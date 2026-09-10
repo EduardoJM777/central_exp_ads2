@@ -1,59 +1,46 @@
-# CentralExpAds2
+# Central de Experiências ADS
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.6.
+Portal interativo para apresentar projetos do curso de Análise e Desenvolvimento de Sistemas. Cada experiência permanece isolada em sua própria pasta, com frontend, backend e dependências independentes.
 
-## Development server
+## Projetos
 
-To start a local development server, run:
-
-```bash
-ng serve
+```text
+central_exp_ads2/
+├── src/                  Portal e menu principal (Angular 22, porta 4300)
+├── sistema-invadido/     Experiência de segurança (front 4200, API 3333)
+└── cidade-inteligente/   Simulador de gestão urbana (front 4201, API 3334)
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Preparação
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Use Node.js `24.20.0` e instale as dependências uma vez:
 
 ```bash
-ng generate component component-name
+npm install
+(cd sistema-invadido/backend && npm install)
+(cd sistema-invadido/frontend && npm install)
+(cd cidade-inteligente/backend && npm install)
+(cd cidade-inteligente/frontend && npm install)
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Executar tudo
+
+No Git Bash:
 
 ```bash
-ng generate --help
+bash iniciar-central.sh
 ```
 
-## Building
+Abra `http://localhost:4300`. O portal direciona para as experiências prontas nas portas 4200 e 4201.
 
-To build the project run:
+Também é possível iniciar cada frontend e backend separadamente com `npm start` ou `npm run dev` dentro da pasta correspondente.
 
-```bash
-ng build
-```
+## Cidade Inteligente
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- Cinco decisões sorteadas entre dez situações urbanas.
+- Orçamento inicial de R$ 20 milhões e custos reais por alternativa.
+- Cidade isométrica com moradores, sensores e eventos visuais.
+- Prestação de contas, reserva de emergência e bônus fiscal.
+- Ranking persistente em SQLite.
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Os dados das experiências são fictícios e destinados à apresentação acadêmica.

@@ -3,11 +3,11 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "1227a37e-1cf3-4b9e-a135-f476dbdc2ef7"
+    "analytics": "e7632902-1bb7-460b-a3fe-edf802f1f943"
   },
   "newProjectRoot": "projects",
   "projects": {
-    "central_exp_ads2": {
+    "frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -44,16 +44,11 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "20kB",
-                  "maximumError": "25kB"
+                  "maximumWarning": "35kB",
+                  "maximumError": "40kB"
                 }
               ],
-              "outputHashing": "all",
-              "optimization": {
-                "scripts": true,
-                "styles": true,
-                "fonts": false
-              }
+              "outputHashing": "all"
             },
             "development": {
               "optimization": false,
@@ -67,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "central_exp_ads2:build:production"
+              "buildTarget": "frontend:build:production"
             },
             "development": {
-              "buildTarget": "central_exp_ads2:build:development"
+              "buildTarget": "frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
