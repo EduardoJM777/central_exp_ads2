@@ -19,6 +19,10 @@
 }
 
 .em-stage { max-width: 1240px; margin: 0 auto; }
+.em-brand { display:flex; align-items:center; gap:12px; width:fit-content; margin-bottom:32px; color:var(--text); text-decoration:none; font-size:14px; line-height:1.4; }
+.em-brand strong { font-size:17px; }
+.em-brand img { display:block; width:90px; height:74px; object-fit:contain; flex-shrink:0; border-radius:10px; background:#fff; }
+.em-brand:focus-visible { outline:3px solid var(--amber); outline-offset:5px; border-radius:10px; }
 .em-header { max-width: 820px; margin-bottom: clamp(2.5rem, 6vw, 4.5rem); }
 .em-eyebrow { display:flex; align-items:center; gap:.65rem; margin-bottom:1rem; color:var(--teal); font:700 .9rem 'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; }
 .em-eyebrow i { width:.65rem; height:.65rem; border-radius:50%; background:var(--teal); box-shadow:0 0 1rem var(--teal); }

@@ -3,7 +3,7 @@
 .hm-header { display:flex; justify-content:space-between; align-items:center; gap:24px; margin-bottom:clamp(40px,7vh,90px); }
 .hm-brand { display:flex; align-items:center; gap:12px; color:inherit; text-decoration:none; font-size:14px; line-height:1.4; }
 .hm-brand strong { font-size:17px; }
-.hm-brand-icon { display:grid; place-items:center; width:48px; height:48px; border-radius:15px; color:#071923; background:#67e4c4; font-size:32px; font-weight:700; }
+.hm-brand-logo { display:block; width:90px; height:74px; object-fit:contain; flex-shrink:0; border-radius:10px; background:#fff; }
 .hm-edition { color:#9caec6; font-size:14px; }.hm-edition span { color:#64debf; margin:0 10px; }
 .hm-layout { display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:clamp(32px,5vw,80px); }
 .hm-eyebrow { display:flex; align-items:center; gap:9px; margin:0 0 24px; color:#7be8cc; font-size:12px; font-weight:700; letter-spacing:.09em; line-height:1.6; }
