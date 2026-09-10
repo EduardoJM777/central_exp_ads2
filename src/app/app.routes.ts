@@ -54,8 +54,9 @@ export const routes: Routes = [
 },
     {
         path: 'experiencias/cidade-inteligente',
-        component: ComingSoonComponent,
-        data: { title: 'Cidade Inteligente', emoji: '🏙' }
+        loadComponent: () =>
+            import('../../sistema-invadido/frontend/src/app/cidade-inteligente/app')
+                .then((m) => m.App)
     },
 
     {
