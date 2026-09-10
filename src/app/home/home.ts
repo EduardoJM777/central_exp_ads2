@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterLink } from "@angular/router";
-import { CommonModule } from '@angular/common';
+import { EXPERIENCE_MENU_ITEMS } from '../experiencias/experiencias-menu/experiencias-menu.data';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
 export class HomeComponent {
-  // TODO: substituir por dados reais vindos de um serviço de ranking (seção 17 do documento)
-  readonly challengesCompletedToday = 0;
-  readonly topRanking: { alias: string; score: number }[] = [];
+  readonly experienceCount = EXPERIENCE_MENU_ITEMS.filter(item => item.status === 'ready').length;
 }

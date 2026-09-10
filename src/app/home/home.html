@@ -1,32 +1,35 @@
-<div class="hm-stage">
-    <div class="hm-content">
+<main class="hm-stage">
+  <header class="hm-header">
+    <a class="hm-brand" routerLink="/inicio" aria-label="Central de Experiências ADS, início">
+      <span class="hm-brand-icon" aria-hidden="true">↗</span>
+      <span>Central de<br><strong>Experiências ADS</strong></span>
+    </a>
+    <span class="hm-edition">UNIPAR <span>•</span> Tecnologia na prática</span>
+  </header>
 
-        <span class="hm-eyebrow">Central de Experiências ADS</span>
-        <h1 class="hm-title">Teste seu raciocínio.<br>
-            Resolva desafios.<br>
-            <span>Descubra seu perfil.</span>
-        </h1>
+  <div class="hm-layout">
+    <section class="hm-content">
+      <p class="hm-eyebrow"><span></span> SUA PRÓXIMA DESCOBERTA COMEÇA AQUI</p>
+      <h1>Você no controle.<br><em>Ideias em jogo.</em></h1>
+      <p class="hm-description">Investigue um sistema, decifre um código ou assuma uma cidade. Descubra o que você pode criar com tecnologia.</p>
+      <a class="hm-cta" routerLink="/experiencias">Escolher minha experiência <span aria-hidden="true">↗</span></a>
+      <p class="hm-hint"><span aria-hidden="true">✓</span> Pode entrar. Você não precisa saber programar.</p>
+      <div class="hm-details">
+        <div><strong>{{ experienceCount.toString().padStart(2, '0') }}</strong><span>experiências<br>para explorar</span></div>
+        <div class="hm-detail-copy"><span>Da curiosidade à prática.</span><b>Seu primeiro passo em ADS.</b></div>
+      </div>
+    </section>
 
-        <button class="hm-cta" routerLink="/experiencias">Começar agora</button>
-
-        <p class="hm-hint">Não é necessário conhecimento prévio de programação.</p>
-
-        <div class="hm-stats">
-            <div class="hm-stat">
-                <span class="hm-stat-value">{{ challengesCompletedToday }}</span>
-                <span class="hm-stat-label">desafios realizados hoje</span>
-            </div>
-        </div>
-
-        <div class="hm-ranking" *ngIf="topRanking.length">
-            <h2 class="hm-ranking-title">Melhores do dia</h2>
-            <ol class="hm-ranking-list">
-                <li *ngFor="let entry of topRanking">
-                    <span>{{ entry.alias }}</span>
-                    <span>{{ entry.score }} pts</span>
-                </li>
-            </ol>
-        </div>
-
-    </div>
-</div>
+    <section class="hm-showcase" aria-label="Conheça algumas experiências">
+      <a class="hm-city" routerLink="/experiencias/cidade-inteligente">
+        <img src="/city-isometric.png" alt="Cidade isométrica iluminada com ruas, parque e edifícios" fetchpriority="high" width="1672" height="941">
+        <div class="hm-city-top"><span><i></i> CIDADE INTELIGENTE</span><span aria-hidden="true">↗</span></div>
+        <div class="hm-city-caption"><small>O PRÓXIMO PREFEITO É VOCÊ</small><h2>Uma cidade inteira.<br>Suas decisões.</h2><span>Assumir a prefeitura <b aria-hidden="true">→</b></span></div>
+      </a>
+      <div class="hm-mini-grid">
+        <a class="hm-mini hm-security" routerLink="/experiencias/sistema-invadido"><span class="hm-mini-icon" aria-hidden="true">🔐</span><div><small>INVESTIGUE AS PISTAS</small><h3>Sistema Invadido</h3></div><span class="hm-arrow" aria-hidden="true">↗</span></a>
+        <a class="hm-mini hm-code" routerLink="/experiencias/codigo-misterioso"><span class="hm-mini-icon" aria-hidden="true">⌘</span><div><small>DECIFRE O DESAFIO</small><h3>Código Misterioso</h3></div><span class="hm-arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </div>
+</main>

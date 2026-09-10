@@ -65,6 +65,7 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": { "prebundle": false },
           "configurations": {
             "production": {
               "buildTarget": "central_exp_ads2:build:production"
