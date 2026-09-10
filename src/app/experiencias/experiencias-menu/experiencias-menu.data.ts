@@ -44,8 +44,7 @@ export const EXPERIENCE_MENU_ITEMS: ExperienceMenuItem[] = [
         description: 'Assuma a prefeitura, invista o orçamento e transforme uma cidade viva.',
         concepts: 'Dados, APIs, sistemas, IoT',
         duration: '4-6 min',
-        status: 'ready',
-        url: 'http://localhost:4201'
+        status: 'ready'
     },
     {
         slug: 'mini-game',

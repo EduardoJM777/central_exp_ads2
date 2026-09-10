@@ -11,7 +11,7 @@
             class="em-card"
             [class.em-card--soon]="item.status === 'coming-soon'"
             [class.em-card--ready]="item.status === 'ready'"
-            [href]="item.url || '/experiencias/' + item.slug">
+            [routerLink]="['/experiencias', item.slug]">
 
             <div class="em-card-top"><span class="em-card-number">0{{ items.indexOf(item) + 1 }}</span><span class="em-card-emoji">{{ item.emoji }}</span></div>
             <h2 class="em-card-name">{{ item.name }}</h2>

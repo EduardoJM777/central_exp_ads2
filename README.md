@@ -15,6 +15,8 @@ O portal Angular reúne as experiências em rotas internas. Cidade Inteligente e
 
 Use Node 24.20.0. Instale as dependências com `npm ci` na raiz e em `sistema-invadido/backend`. Depois execute `bash iniciar-central.sh` no Git Bash.
 
+O frontend integrado usa npm workspaces para compartilhar a mesma instalação do Angular com o portal. Instale as dependências de frontend pela raiz; o backend mantém sua instalação separada.
+
 Portal: http://localhost:4300. Backend: http://localhost:3333.
 Cidade: /experiencias/cidade-inteligente. API da Cidade: /api/cidade.
 Não é necessário iniciar um servidor na porta 4201.
