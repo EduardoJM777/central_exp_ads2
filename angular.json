@@ -1,77 +1,39 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-<<<<<<< HEAD
-=======
-
->>>>>>> e49909b (Incluido o codigo misterioso)
   "cli": {
     "packageManager": "npm",
     "analytics": "1227a37e-1cf3-4b9e-a135-f476dbdc2ef7"
   },
-<<<<<<< HEAD
   "newProjectRoot": "projects",
   "projects": {
     "central_exp_ads2": {
       "projectType": "application",
-=======
-
-  "newProjectRoot": "projects",
-
-  "projects": {
-    "central_exp_ads2": {
-      "projectType": "application",
-
->>>>>>> e49909b (Incluido o codigo misterioso)
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-<<<<<<< HEAD
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
-=======
-
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
-
-      "architect": {
-        "build": {
-          "builder": "@angular/build:application",
-
->>>>>>> e49909b (Incluido o codigo misterioso)
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-<<<<<<< HEAD
-=======
-
->>>>>>> e49909b (Incluido o codigo misterioso)
             "assets": [
               {
                 "glob": "**/*",
                 "input": "public"
               }
             ],
-<<<<<<< HEAD
-=======
-
->>>>>>> e49909b (Incluido o codigo misterioso)
             "styles": [
               "src/styles.scss"
             ]
           },
-<<<<<<< HEAD
-=======
-
->>>>>>> e49909b (Incluido o codigo misterioso)
           "configurations": {
             "production": {
               "budgets": [
@@ -86,64 +48,33 @@
                   "maximumError": "20kB"
                 }
               ],
-<<<<<<< HEAD
               "outputHashing": "all",
-=======
-
-              "outputHashing": "all",
-
->>>>>>> e49909b (Incluido o codigo misterioso)
               "optimization": {
                 "scripts": true,
                 "styles": true,
                 "fonts": false
               }
             },
-<<<<<<< HEAD
-=======
-
->>>>>>> e49909b (Incluido o codigo misterioso)
             "development": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
             }
           },
-<<<<<<< HEAD
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular/build:dev-server",
-=======
-
-          "defaultConfiguration": "production"
-        },
-
-        "serve": {
-          "builder": "@angular/build:dev-server",
-
->>>>>>> e49909b (Incluido o codigo misterioso)
           "configurations": {
             "production": {
               "buildTarget": "central_exp_ads2:build:production"
             },
-<<<<<<< HEAD
-=======
-
->>>>>>> e49909b (Incluido o codigo misterioso)
             "development": {
               "buildTarget": "central_exp_ads2:build:development"
             }
           },
-<<<<<<< HEAD
           "defaultConfiguration": "development"
         },
-=======
-
-          "defaultConfiguration": "development"
-        },
-
->>>>>>> e49909b (Incluido o codigo misterioso)
         "test": {
           "builder": "@angular/build:unit-test"
         }
